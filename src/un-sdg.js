@@ -2,7 +2,6 @@ import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 
 export class unSdg extends DDDSuper(LitElement) {
-
   static get tag() {
     return "un-sdg";
   }
@@ -20,7 +19,6 @@ export class unSdg extends DDDSuper(LitElement) {
     };
   }
   
-
   static get styles() {
     return [super.styles,
     css`
@@ -45,6 +43,7 @@ export class unSdg extends DDDSuper(LitElement) {
       }
     `];
   }
+
 
   render() {
     const goals = {
@@ -134,15 +133,16 @@ export class unSdg extends DDDSuper(LitElement) {
         title: "A City Rising: How Phoenix Is Harnessing The Power Of SDG 17"
       }
     };
-  
-    // Check if the goal is "all" to render all calendar items
-if (this.goal === "all") {
+  // Check if the goal is "all" to render all calendar items
+  if (this.goal === "all") {
     return html`
       <section class="interactive-calendar-block container plain pt-0 pb-5">
         <div class="row no-gutters">
           ${Object.keys(goals).map(goalNumber => html`
             <div class="col-12 col-sm-3 calendar-item px-2">
-              <div class="calendar-item-img" style="background-image: url('/src/lib/svgs/goal-${goalNumber}.svg'); background-size: cover;">
+              <div class="calendar-item-img" style="background-image: url('/src/lib/svgs/goal-${goalNumber}.svg'); 
+                background-size: ${this.colorOnly ? '10000%' : 'cover'}; 
+                background-position: ${this.colorOnly ? '0 0' : 'center'};">
                 <a class="d-flex flex-column justify-content-end calendar-item-link" href="${goals[goalNumber].link}" target="">
                   <div class="calendar-item-link-container">
                     <div class="calendar-item-title"></div>
@@ -159,54 +159,52 @@ if (this.goal === "all") {
       </head>
       <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
     `;
-}
+  }
 
-// For individual goals
-const goal = goals[this.goal]; // Get goal data by key
+  // For individual goals
+  const goal = goals[this.goal]; // Get goal data by key
 
-if (!goal) {
-  console.log("Invalid goal");
-  return;
-}
+  if (!goal) {
+    console.log("Invalid goal");
+    return;
+  }
 
-console.log(`Goal is ${this.goal}`);
+  console.log(`Goal is ${this.goal}`);
 
-return html`
-  <section class="interactive-calendar-block container plain pt-0 pb-5">
-    <div class="row no-gutters">
-      <div class="col-12">
-        <div class="row no-gutters">
-          <div class="col-12 col-sm-3 calendar-item px-2">
-            <div class="calendar-item-img" style="background-image: url('/src/lib/svgs/goal-${this.goal}.svg'); background-size: cover;">
-              <a class="d-flex flex-column justify-content-end calendar-item-link" href="${goal.link}" target="">
-                <div class="calendar-item-link-container">
-                  <div class="calendar-item-title"></div>
-                  <div class="calendar-item-team">${goal.title}</div>
-                </div>
-              </a>
+  return html`
+    <section class="interactive-calendar-block container plain pt-0 pb-5">
+      <div class="row no-gutters">
+        <div class="col-12">
+          <div class="row no-gutters">
+            <div class="col-12 col-sm-3 calendar-item px-2">
+              <div class="calendar-item-img" style="background-image: url('/src/lib/svgs/goal-${this.goal}.svg'); 
+                background-size: ${this.colorOnly ? '10000%' : 'cover'}; 
+                background-position: ${this.colorOnly ? '0 0' : 'center'};">
+                <a class="d-flex flex-column justify-content-end calendar-item-link" href="${goal.link}" target="">
+                  <div class="calendar-item-link-container">
+                    <div class="calendar-item-title"></div>
+                    <div class="calendar-item-team">${goal.title}</div>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <head>
-    <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
-  </head>
-  <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
-`;
+    </section>
+    <head>
+      <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
+    </head>
+    <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
+  `;
+}
 
-    }
-  
-
-
-  /**
-   * haxProperties integration via file reference
-   */
-  static get haxProperties() {
-    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url)
-      .href;
-  }
+/**
+ * haxProperties integration via file reference
+ */
+static get haxProperties() {
+  return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
+}
 }
 
 globalThis.customElements.define(unSdg.tag, unSdg);
