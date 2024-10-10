@@ -21,28 +21,32 @@ export class unSdg extends DDDSuper(LitElement) {
   
   static get styles() {
     return [super.styles,
-    css`
-      :host {
-        display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
-        font-family: var(--ddd-font-navigation);
-        font-size: var(--un-sdg-font-size, var(--ddd-font-size-s));
-      }
-      .wrapper {
-        margin: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-4);
-      }
-      div {
-        padding: 0;
-        margin: 0;
-      }
-      svg {
-        width: 170px;
-        height: 170px;
-      }
-    `];
+      css`
+        :host {
+          display: block;
+          color: var(--ddd-theme-primary);
+          background-color: var(--ddd-theme-accent);
+          font-family: var(--ddd-font-navigation);
+          font-size: var(--un-sdg-font-size, var(--ddd-font-size-s));
+          width: var(--un-sdg-width, auto); 
+          height: var(--un-sdg-height, auto); 
+        }
+        .wrapper {
+          margin: var(--ddd-spacing-2);
+          padding: var(--ddd-spacing-4);
+        }
+        div {
+          padding: 0;
+          margin: 0;
+        }
+        svg {
+          width: var(--un-sdg-svg-width, 170px); 
+          height: var(--un-sdg-svg-height, 170px); 
+        }
+      `
+    ];
   }
+  
 
 
   render() {
@@ -159,6 +163,12 @@ export class unSdg extends DDDSuper(LitElement) {
       </head>
       <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
     `;
+  }
+  else if (this.goal === "circle"){
+    return html`
+    <img src="src/lib/svgs/circle.png" alt="SDG Circle">
+
+    `
   }
 
   // For individual goals
