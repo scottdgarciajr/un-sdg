@@ -37,7 +37,7 @@
   <div id="demo">
     <h1>un-sdg</h1>
     <!-- this is going to do whatever the tag's defaults are -->
-    <h2>Default</h2>
+    <h2>Colorless Randomization</h2>
     <style>
       /* Basic styling for the button */
       #randomize-button {
@@ -52,15 +52,13 @@
 
   <un-sdg goal="1" colorOnly=true id="top_goal"></un-sdg>
   <button id="randomize-button">Randomize Goal</button>
-
-  
-    <un-sdg goal="circle"></un-sdg>
-    <un-sdg goal="2"></un-sdg>
+  <h2>Display All</h2>
     <un-sdg></un-sdg>
-    <h2>Slot usage</h2>
-    <un-sdg data-accent="2" data-primary="17"><div>Sample slot content</div></un-sdg>
-    <h2>Property usage</h2>
-    <un-sdg goal = "8" id="example" itemHeight="100px" itemHeight="100px"></un-sdg>
+    <h2>Display All [Color Only]</h2>
+    <un-sdg colorOnly="true"></un-sdg>
+    <un-sdg goal="circle"></un-sdg>
+    <h2>Resized Height</h2>
+    <un-sdg goal = "8" id="example" itemHeight="100px" itemWidth="100px"></un-sdg>
 
   </div>
   <script type="module" src="./src/un-sdg.js"></script>
