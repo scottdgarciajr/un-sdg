@@ -1,11 +1,9 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
-
 export class unSdg extends DDDSuper(LitElement) {
   static get tag() {
     return "un-sdg";
   }
-
   static get properties() {
     return {
       goal: { type: String },
@@ -14,7 +12,6 @@ export class unSdg extends DDDSuper(LitElement) {
       itemHeight: { type: String }, // New property for height
     };
   }
-
   constructor() {
     super();
     this.goal = "all";
@@ -22,7 +19,6 @@ export class unSdg extends DDDSuper(LitElement) {
     this.itemWidth = "500px"; // Default width
     this.itemHeight = "250px"; // Default height
   }
-
   static get styles() {
     return [
       super.styles,
@@ -34,20 +30,17 @@ export class unSdg extends DDDSuper(LitElement) {
   font-family: var(--ddd-font-navigation);
   font-size: var(--un-sdg-font-size, var(--ddd-font-size-s));
 }
-
 .wrapper {
   margin: var(--ddd-spacing-2);
   padding: var(--ddd-spacing-4);
   display: flex; 
   justify-content: center; 
 }
-
 .calendar-item {
   width: var(--un-sdg-item-width, auto); 
   height: var(--un-sdg-item-height, auto); 
   overflow: hidden; /* Prevent overflow */
 }
-
 .calendar-item-img {
   width: 100% !important; /* Full width */
   height: 100% !important; /* Full height */
@@ -55,18 +48,13 @@ export class unSdg extends DDDSuper(LitElement) {
   background-repeat: no-repeat !important; /* Prevent repeating */
   background-position: center !important; /* Center the image */
 }
-
 svg {
   width: 100%; /* Full width */
   height: auto; /* Maintain aspect ratio */
 }
-
       `,
     ];
   }
-  
-
-
   render() {
     const goals = {
       1: {
@@ -155,13 +143,9 @@ svg {
         title: "A City Rising: How Phoenix Is Harnessing The Power Of SDG 17"
       }
     };
-
-      // Set CSS variables for item width and height
-      this.style.setProperty('--un-sdg-item-width', this.itemWidth);
+      this.style.setProperty('--un-sdg-item-width', this.itemWidth);// Set CSS variables for item width and height
       this.style.setProperty('--un-sdg-item-height', this.itemHeight);
-  
-      // Check if the goal is "all" to render all calendar items
-      if (this.goal === "all") {
+   if (this.goal === "all") {// Check if the goal is "all" to render all calendar items
         return html`
           <section class="interactive-calendar-block container plain pt-0 pb-5">
             <div class="row no-gutters">
@@ -185,7 +169,6 @@ svg {
         <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
       </head>
       <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
-    
         `;
       }
   
@@ -195,7 +178,6 @@ svg {
         console.log("Invalid goal");
         return;
       }
-  
       return html`
   <section class="interactive-calendar-block container plain pt-0 pb-5">
     <div class="row no-gutters">
@@ -215,20 +197,10 @@ svg {
         <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
       </head>
       <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
-    
 `;
-
     }
-
-
-
-
-/**
- * haxProperties integration via file reference
- */
-static get haxProperties() {
+static get haxProperties() {//haxProperties integration via file reference
   return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
 }
 }
-
 globalThis.customElements.define(unSdg.tag, unSdg);
