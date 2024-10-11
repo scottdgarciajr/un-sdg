@@ -174,7 +174,7 @@ export class unSdg extends DDDSuper(LitElement) {
                 <div class="col-12 col-sm-3 calendar-item px-2">
                   <div
                     class="calendar-item-img ${this.colorOnly ? 'color-only' : ''}"
-                    style="background-image: url('/src/lib/svgs/goal-${goalNumber}.svg');"
+                    style="background-image: url('/lib/svgs/goal-${goalNumber}.svg');"
                   >
                     <a
                       class="d-flex flex-column justify-content-end calendar-item-link"
@@ -214,7 +214,7 @@ export class unSdg extends DDDSuper(LitElement) {
           <div class="col-12 col-sm-3 calendar-item px-2">
             <div
               class="calendar-item-img ${this.colorOnly ? 'color-only' : ''}"
-              style="background-image: url('/src/lib/svgs/goal-${this.goal}.svg');"
+              style="background-image: url('/lib/svgs/goal-${this.goal}.svg');"
             >
               <a
                 class="d-flex flex-column justify-content-end calendar-item-link"
