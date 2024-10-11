@@ -1,9 +1,11 @@
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
+
 export class unSdg extends DDDSuper(LitElement) {
   static get tag() {
     return "un-sdg";
   }
+
   static get properties() {
     return {
       goal: { type: String },
@@ -12,49 +14,63 @@ export class unSdg extends DDDSuper(LitElement) {
       itemHeight: { type: String }, // New property for height
     };
   }
+
   constructor() {
     super();
     this.goal = "all";
     this.colorOnly = false;
     this.itemWidth = "500px"; // Default width
-    this.itemHeight = "250px"; // Default height
+    this.itemHeight = "200px"; // Default height
   }
+
   static get styles() {
     return [
       super.styles,
       css`
         :host {
-  display: block;
-  color: var(--ddd-theme-primary);
-  background-color: var(--ddd-theme-accent);
-  font-family: var(--ddd-font-navigation);
-  font-size: var(--un-sdg-font-size, var(--ddd-font-size-s));
-}
-.wrapper {
-  margin: var(--ddd-spacing-2);
-  padding: var(--ddd-spacing-4);
-  display: flex; 
-  justify-content: center; 
-}
-.calendar-item {
-  width: var(--un-sdg-item-width, auto); 
-  height: var(--un-sdg-item-height, auto); 
-  overflow: hidden; /* Prevent overflow */
-}
-.calendar-item-img {
-  width: 100% !important; /* Full width */
-  height: 100% !important; /* Full height */
-  background-size: contain !important; /* Change to contain */
-  background-repeat: no-repeat !important; /* Prevent repeating */
-  background-position: center !important; /* Center the image */
-}
-svg {
-  width: 100%; /* Full width */
-  height: auto; /* Maintain aspect ratio */
-}
+          display: block;
+          color: var(--ddd-theme-primary);
+          background-color: var(--ddd-theme-accent);
+          font-family: var(--ddd-font-navigation);
+          font-size: var(--un-sdg-font-size, var(--ddd-font-size-s));
+        }
+
+        .wrapper {
+          margin: var(--ddd-spacing-2);
+          padding: var(--ddd-spacing-4);
+          display: flex;
+          justify-content: center;
+        }
+
+        .calendar-item {
+          width: var(--un-sdg-item-width, auto);
+          height: var(--un-sdg-item-height, auto);
+          overflow: hidden; /* Prevent overflow */
+        }
+
+        .calendar-item-img {
+          width: 100% !important; /* Full width */
+          height: 100% !important; /* Full height */
+          background-size: contain !important; /* Default behavior */
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+        }
+
+        .calendar-item-img.color-only {
+          background-size: 10000% !important; /* Zoom effect */
+          background-position: 0 0 !important;
+        }
+
+        svg {
+          width: 100%;
+          height: auto;
+        }
       `,
     ];
   }
+  
+
+
   render() {
     const goals = {
       1: {
@@ -143,64 +159,90 @@ svg {
         title: "A City Rising: How Phoenix Is Harnessing The Power Of SDG 17"
       }
     };
-      this.style.setProperty('--un-sdg-item-width', this.itemWidth);// Set CSS variables for item width and height
-      this.style.setProperty('--un-sdg-item-height', this.itemHeight);
-   if (this.goal === "all") {// Check if the goal is "all" to render all calendar items
-        return html`
-          <section class="interactive-calendar-block container plain pt-0 pb-5">
-            <div class="row no-gutters">
-              ${Object.keys(goals).map((goalNumber) => html`
+
+     // Set CSS variables for item width and height
+    this.style.setProperty('--un-sdg-item-width', this.itemWidth);
+    this.style.setProperty('--un-sdg-item-height', this.itemHeight);
+
+    // Check if the goal is "all" to render all calendar items
+    if (this.goal === "all") {
+      return html`
+        <section class="interactive-calendar-block container plain pt-0 pb-5">
+          <div class="row no-gutters">
+            ${Object.keys(goals).map(
+              (goalNumber) => html`
                 <div class="col-12 col-sm-3 calendar-item px-2">
-                  <div class="calendar-item-img" style="background-image: url('/src/lib/svgs/goal-${goalNumber}.svg'); 
-                    background-size: ${this.colorOnly ? '10000%' : 'cover'};
-                    background-position: ${this.colorOnly ? '0 0' : 'center'};">
-                    <a class="d-flex flex-column justify-content-end calendar-item-link" href="${goals[goalNumber].link}" target="">
+                  <div
+                    class="calendar-item-img ${this.colorOnly ? 'color-only' : ''}"
+                    style="background-image: url('/src/lib/svgs/goal-${goalNumber}.svg');"
+                  >
+                    <a
+                      class="d-flex flex-column justify-content-end calendar-item-link"
+                      href="${goals[goalNumber].link}"
+                      target=""
+                    >
                       <div class="calendar-item-link-container">
                         <div class="calendar-item-title"></div>
-                        <div class="calendar-item-team">${goals[goalNumber].title}</div>
+                        <div class="calendar-item-team">
+                          ${goals[goalNumber].title}
+                        </div>
                       </div>
                     </a>
                   </div>
                 </div>
-              `)}
-            </div>
-          </section>
-          <head>
+              `
+            )}
+          </div>
+        </section>
+        <head>
         <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
       </head>
       <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
-        `;
-      }
-  
-      // For individual goals
-      const goal = goals[this.goal]; // Get goal data by key
-      if (!goal) {
-        console.log("Invalid goal");
-        return;
-      }
-      return html`
-  <section class="interactive-calendar-block container plain pt-0 pb-5">
-    <div class="row no-gutters">
-      <div class="col-12 col-sm-3 calendar-item px-2">
-        <div class="calendar-item-img" style="background-image: url('/src/lib/svgs/goal-${this.goal}.svg');">
-          <a class="d-flex flex-column justify-content-end calendar-item-link" href="${goal.link}" target="">
-            <div class="calendar-item-link-container">
-              <div class="calendar-item-title"></div>
-              <div class="calendar-item-team">${goal.title}</div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <head>
-        <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
-      </head>
-      <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
-`;
+      `;
     }
-static get haxProperties() {//haxProperties integration via file reference
-  return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
+
+    // For individual goals
+    const goal = goals[this.goal]; // Get goal data by key
+    if (!goal) {
+      console.log("Invalid goal");
+      return;
+    }
+
+    return html`
+      <section class="interactive-calendar-block container plain pt-0 pb-5">
+        <div class="row no-gutters">
+          <div class="col-12 col-sm-3 calendar-item px-2">
+            <div
+              class="calendar-item-img ${this.colorOnly ? 'color-only' : ''}"
+              style="background-image: url('/src/lib/svgs/goal-${this.goal}.svg');"
+            >
+              <a
+                class="d-flex flex-column justify-content-end calendar-item-link"
+                href="${goal.link}"
+                target=""
+              >
+                <div class="calendar-item-link-container">
+                  <div class="calendar-item-title"></div>
+                  <div class="calendar-item-team">${goal.title}</div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <head>
+        <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
+      </head>
+      <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
+    `;
+  }
+
+  /**
+   * haxProperties integration via file reference
+   */
+  static get haxProperties() {
+    return new URL(`./lib/${this.tag}.haxProperties.json`, import.meta.url).href;
+  }
 }
-}
+
 globalThis.customElements.define(unSdg.tag, unSdg);
