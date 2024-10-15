@@ -200,6 +200,37 @@ export class unSdg extends DDDSuper(LitElement) {
       <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
       `;
     }
+    
+    // Check for "circle" goal
+    if (this.goal === "circle") {
+      return html`
+        <section class="interactive-calendar-block container plain pt-0 pb-5">
+          <div class="row no-gutters">
+            <div class="col-12 col-sm-3 calendar-item px-2">
+              <div
+                class="calendar-item-img ${this.colorOnly ? 'color-only' : ''}"
+                style="background-image: url('/lib/svgs/circle.png');"
+              >
+                <a
+                  class="d-flex flex-column justify-content-end calendar-item-link"
+                  href="#"
+                  target=""
+                >
+                  <div class="calendar-item-link-container">
+                    <div class="calendar-item-title"></div>
+                    <div class="calendar-item-team">Circle Image</div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+        <head>
+          <link rel="stylesheet" href="https://unfoundation.org/app/themes/unf/dist/styles/main.css">
+        </head>
+        <script src="https://unfoundation.org/app/themes/unf/dist/scripts/main.js" async></script>
+      `;
+    }
 
     // For individual goals
     const goal = goals[this.goal]; // Get goal data by key
