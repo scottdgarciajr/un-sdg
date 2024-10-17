@@ -21,58 +21,7 @@ export class unSdg extends DDDSuper(LitElement) {
     this.colorOnly = false;
     this.itemWidth = "500px"; // Default width
     this.itemHeight = "200px"; // Default height
-  }
-
-  static get styles() {
-    return [
-      super.styles,
-      css`
-        :host {
-          display: block;
-          color: var(--ddd-theme-primary);
-          background-color: var(--ddd-theme-accent);
-          font-family: var(--ddd-font-navigation);
-          font-size: var(--un-sdg-font-size, var(--ddd-font-size-s));
-        }
-
-        .wrapper {
-          margin: var(--ddd-spacing-2);
-          padding: var(--ddd-spacing-4);
-          display: flex;
-          justify-content: center;
-        }
-
-        .calendar-item {
-          width: var(--un-sdg-item-width, auto);
-          height: var(--un-sdg-item-height, auto);
-          overflow: hidden; /* Prevent overflow */
-        }
-
-        .calendar-item-img {
-          width: 100% !important; /* Full width */
-          height: 100% !important; /* Full height */
-          background-size: contain !important; /* Default behavior */
-          background-repeat: no-repeat !important;
-          background-position: center !important;
-        }
-
-        .calendar-item-img.color-only {
-          background-size: 10000% !important; /* Zoom effect */
-          background-position: 0 0 !important;
-        }
-
-        svg {
-          width: 100%;
-          height: auto;
-        }
-      `,
-    ];
-  }
-  
-
-
-  render() {
-    const goals = {
+    this.goals = {
       1: {
         //imageNumber: "01",
         link: "https://unfoundation.org/blog/post/reversal-and-resilience-sdg-progress-after-a-year-of-covid-19/",
@@ -159,6 +108,58 @@ export class unSdg extends DDDSuper(LitElement) {
         title: "A City Rising: How Phoenix Is Harnessing The Power Of SDG 17"
       }
     };
+  }
+
+  static get styles() {
+    return [
+      super.styles,
+      css`
+        :host {
+          display: block;
+          color: var(--ddd-theme-primary);
+          background-color: var(--ddd-theme-accent);
+          font-family: var(--ddd-font-navigation);
+          font-size: var(--un-sdg-font-size, var(--ddd-font-size-s));
+        }
+
+        .wrapper {
+          margin: var(--ddd-spacing-2);
+          padding: var(--ddd-spacing-4);
+          display: flex;
+          justify-content: center;
+        }
+
+        .calendar-item {
+          width: var(--un-sdg-item-width, auto);
+          height: var(--un-sdg-item-height, auto);
+          overflow: hidden; /* Prevent overflow */
+        }
+
+        .calendar-item-img {
+          width: 100% !important; /* Full width */
+          height: 100% !important; /* Full height */
+          background-size: contain !important; /* Default behavior */
+          background-repeat: no-repeat !important;
+          background-position: center !important;
+        }
+
+        .calendar-item-img.color-only {
+          background-size: 10000% !important; /* Zoom effect */
+          background-position: 0 0 !important;
+        }
+
+        svg {
+          width: 100%;
+          height: auto;
+        }
+      `,
+    ];
+  }
+  
+
+
+  render() {
+    
 
      // Set CSS variables for item width and height
     this.style.setProperty('--un-sdg-item-width', this.itemWidth);
@@ -169,7 +170,7 @@ export class unSdg extends DDDSuper(LitElement) {
       return html`
         <section class="interactive-calendar-block container plain pt-0 pb-5">
           <div class="row no-gutters">
-            ${Object.keys(goals).map(
+            ${Object.keys(this.goals).map(
               (goalNumber) => html`
                 <div class="col-12 col-sm-3 calendar-item px-2">
                   <div
@@ -178,13 +179,13 @@ export class unSdg extends DDDSuper(LitElement) {
                   >
                     <a
                       class="d-flex flex-column justify-content-end calendar-item-link"
-                      href="${goals[goalNumber].link}"
+                      href="${this.goals[goalNumber].link}"
                       target=""
                     >
                       <div class="calendar-item-link-container">
                         <div class="calendar-item-title"></div>
                         <div class="calendar-item-team">
-                          ${goals[goalNumber].title}
+                          ${this.goals[goalNumber].title}
                         </div>
                       </div>
                     </a>
@@ -233,7 +234,7 @@ export class unSdg extends DDDSuper(LitElement) {
     }
 
     // For individual goals
-    const goal = goals[this.goal]; // Get goal data by key
+    const goal = this.goals[this.goal]; // Get goal data by key
     if (!goal) {
       console.log("Invalid goal");
       return;
