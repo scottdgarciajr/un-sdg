@@ -1,0 +1,1 @@
+function o(){return Math.floor(Math.random()*17)+1}document.getElementById("randomize-button").addEventListener("click",function(){const t=o();document.getElementById("top_goal").setAttribute("goal",t),console.log("New Goal:",t)});
